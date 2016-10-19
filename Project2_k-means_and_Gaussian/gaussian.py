@@ -8,7 +8,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 
-plt.figure(figsize=(12,12))
+plt.figure(figsize=(10,10))
 
 r = np.linspace(0, 5, 100)
 d = [1,2,5,10,20]
@@ -17,7 +17,7 @@ i = 0
 
 for x in d:
     
-    S = 2 * (math.pi**((x+1)/2 )) / math.gamma((x+1)/2)
+    S = 2 * (math.pi**((x)/2 )) / math.gamma((x)/2)
     y = (S * r**(x-1) / ((2 * math.pi)**(x/2))) * (math.e**(-(r**2)/2))
     plt.subplot(331+i)
     plt.plot(r,y)
@@ -30,11 +30,13 @@ plt.subplot(336)
 i = 0
 y = [0, 0, 0, 0, 0]
 for x in d:
-    S = 2 * (math.pi**((x+1)/2 )) / math.gamma((x+1)/2)
+    S = 2 * (math.pi**((x)/2 )) / math.gamma((x)/2)
     y[i] = (S * rstar[i]**(x-1) / ((2 * math.pi)**(x/2))) * (math.e**(-(rstar[i]**2)/2))
-    plt.text(rstar[i],y[i],'%f, %f' % (rstar[i],y[i]))
-    i +=1
+    plt.text(rstar[i],y[i],'%.2f, %.2f' % (rstar[i], y[i]),horizontalalignment ="right")
+    plt.xlabel("r *")    
+    i += 1
 
 plt.plot(rstar,y,'o')
-
+plt.xlim(0,5)
+plt.ylim(0.4, 0.60)
 plt.show()
